@@ -1,7 +1,10 @@
 package com.example.android.landonhotels;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -64,11 +67,18 @@ public class DetailActivity extends AppCompatActivity {
         NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender()
                 .setBackground(background);
 
+        Uri uri = Uri.parse("geo:0,0?q=" + hotel.getCity());
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setData(uri);
+
+        PendingIntent mapPI = PendingIntent.getActivity(this, 0, mapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setContentTitle(getText(R.string.app_name))
                 .setStyle(bigTextStyle)
                 .setSmallIcon(R.drawable.ic_notify)
-                .extend(extender);
+                .extend(extender)
+                .addAction(R.drawable.ic_action_map, "Map", mapPI);
         int notificationId = 0;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(notificationId, builder.build());
