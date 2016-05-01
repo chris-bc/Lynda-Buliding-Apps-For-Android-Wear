@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.RemoteInput;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,8 +25,17 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        //Try to get the city from a string extra
         String city = getIntent().getStringExtra("city");
-        setTitle(getString(R.string.landon_hotel) + ", " + city);
+
+        if (city == null) {
+            // Try to get city from RemoteInput object
+            Bundle remoteInput = RemoteInput.getResultsFromIntent(getIntent());
+            if (remoteInput != null) {
+                city = remoteInput.getCharSequence(MainActivity.EXTRA_VOICE_REPLY).toString();
+            }
+        }
+
         hotel = DataProvider.hotelMap.get(city);
 
         if (hotel == null) {
@@ -37,6 +47,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void displayHotelDetails() {
+
+        setTitle(getString(R.string.landon_hotel) + ", " + hotel.getCity());
+
         TextView cityText = (TextView) findViewById(R.id.cityText);
         cityText.setText(hotel.getCity());
 
