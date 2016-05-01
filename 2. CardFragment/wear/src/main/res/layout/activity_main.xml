@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wearable.view.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.wearable.view.ActionPage xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/watch_view_stub"
+    android:id="@+id/action_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:color="@android:color/holo_blue_bright"
+    android:background="@drawable/london_photo"
     tools:context=".MainActivity"
-    tools:deviceIds="wear"
-    android:background="@drawable/london_photo">
-    
-    <FrameLayout android:id="@+id/frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_box="bottom" />
-    
-</android.support.wearable.view.BoxInsetLayout>
+    android:maxLines="1"
+    android:src="@drawable/ic_info"
+    android:text="@string/app_name"
+    tools:deviceIds="wear" />
+
