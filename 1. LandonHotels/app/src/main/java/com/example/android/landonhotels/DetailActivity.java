@@ -1,5 +1,6 @@
 package com.example.android.landonhotels;
 
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -64,7 +65,17 @@ public class DetailActivity extends AppCompatActivity {
                 hotel.getImage(), "drawable", getPackageName()
         );
         Bitmap background = BitmapFactory.decodeResource(getResources(), backgroundId);
+
+        NotificationCompat.BigTextStyle secondPageStyle = new NotificationCompat.BigTextStyle();
+        secondPageStyle.bigText(getText(R.string.lorem_ipsum));
+
+        Notification secondPage = new NotificationCompat.Builder(this)
+                .setContentTitle("Page 2")
+                .setStyle(secondPageStyle)
+                .build();
+
         NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender()
+                .addPage(secondPage)
                 .setBackground(background);
 
         Uri uri = Uri.parse("geo:0,0?q=" + hotel.getCity());
