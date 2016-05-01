@@ -48,10 +48,17 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void sendNotification(View view) {
-        Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
+
+        String text = "Visit Landon hotel in " + hotel.getCity() + "!\n\n" +
+                hotel.getDescription();
+
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.bigText(text);
+
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setContentTitle(getText(R.string.app_name))
-                .setContentText("Your room will be ready for check in at 3pm")
+                .setStyle(bigTextStyle)
                 .setSmallIcon(R.drawable.ic_notify);
         int notificationId = 0;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
