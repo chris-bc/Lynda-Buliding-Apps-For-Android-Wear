@@ -1,6 +1,8 @@
 package com.example.android.landonhotels;
 
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,5 +49,12 @@ public class DetailActivity extends AppCompatActivity {
 
     public void sendNotification(View view) {
         Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setContentTitle(getText(R.string.app_name))
+                .setContentText("Your room will be ready for check in at 3pm")
+                .setSmallIcon(R.drawable.ic_notify);
+        int notificationId = 0;
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(notificationId, builder.build());
     }
 }
