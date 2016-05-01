@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/watch_view_stub"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear"
+    android:background="@android:color/holo_blue_light">
+
+   <RelativeLayout
+       android:id="@+id/layoutContainer"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:gravity="center">
+
+       <TextView
+           android:id="@+id/textView"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/app_name"
+           android:gravity="center"
+           android:textStyle="bold"
+           android:textSize="20sp"/>
+
+   </RelativeLayout>
+
+</android.support.wearable.view.BoxInsetLayout>
