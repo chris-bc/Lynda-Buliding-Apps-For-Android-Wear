@@ -54,44 +54,53 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void sendNotification(View view) {
+//        Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
 
-        String text = "Visit Landon hotel in " + hotel.getCity() + "!\n\n" +
-                hotel.getDescription();
-
-        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        String text = "Visit Landon Hotel in " + hotel.getCity() +
+                "!\n\n" + hotel.getDescription();
+        NotificationCompat.BigTextStyle bigTextStyle =
+                new NotificationCompat.BigTextStyle();
         bigTextStyle.bigText(text);
 
         int backgroundId = getResources().getIdentifier(
-                hotel.getImage(), "drawable", getPackageName()
-        );
-        Bitmap background = BitmapFactory.decodeResource(getResources(), backgroundId);
+                hotel.getImage(), "drawable", getPackageName());
+        Bitmap background = BitmapFactory.decodeResource(getResources(),
+                backgroundId);
 
-        NotificationCompat.BigTextStyle secondPageStyle = new NotificationCompat.BigTextStyle();
+        NotificationCompat.BigTextStyle secondPageStyle =
+                new NotificationCompat.BigTextStyle();
         secondPageStyle.bigText(getText(R.string.lorem_ipsum));
 
-        Notification secondPage = new NotificationCompat.Builder(this)
+        Notification secondPage =
+                new NotificationCompat.Builder(this)
                 .setContentTitle("Page 2")
                 .setStyle(secondPageStyle)
                 .build();
 
-        NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender()
-                .addPage(secondPage)
-                .setBackground(background);
+        NotificationCompat.WearableExtender extender =
+                new NotificationCompat.WearableExtender()
+                        .addPage(secondPage)
+                        .setBackground(background);
 
         Uri uri = Uri.parse("geo:0,0?q=" + hotel.getCity());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW);
         mapIntent.setData(uri);
 
-        PendingIntent mapPI = PendingIntent.getActivity(this, 0, mapIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent mapPendingIntent =
+                PendingIntent.getActivity(this, 0, mapIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentTitle(getText(R.string.app_name))
-                .setStyle(bigTextStyle)
-                .setSmallIcon(R.drawable.ic_notify)
-                .extend(extender)
-                .addAction(R.drawable.ic_action_map, "Map", mapPI);
-        int notificationId = 0;
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(notificationId, builder.build());
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this)
+                        .setContentTitle(getText(R.string.app_name))
+                        .setStyle(bigTextStyle)
+                        .setSmallIcon(R.drawable.ic_notify)
+                        .addAction(R.drawable.ic_action_map, "Map", mapPendingIntent)
+                        .extend(extender);
+
+        int notificationId = 1;
+        NotificationManagerCompat mgr =
+                NotificationManagerCompat.from(this);
+        mgr.notify(notificationId, builder.build());
     }
 }
