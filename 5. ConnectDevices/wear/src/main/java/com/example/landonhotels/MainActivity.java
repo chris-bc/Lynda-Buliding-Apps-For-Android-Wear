@@ -40,7 +40,28 @@ public class MainActivity extends Activity
     public void buttonClickHandler(View view) {
 
         //Send message to handheld device
+        Button button = (Button)view;
+        String city = button.getText().toString();
+        sendMessage(city);
+    }
 
+    private void sendMessage(String city) {
+        if (mNode != null && mGoogleApiClient != null) {
+            Wearable.MessageApi.sendMessage(mGoogleApiClient,
+                    mNode.getId(),
+                    WEAR_PATH,
+                    city.getBytes())
+                    .setResultCallback(new ResultCallback<MessageApi.SendMessageResult>() {
+                        @Override
+                        public void onResult(MessageApi.SendMessageResult sendMessageResult) {
+                            if (!sendMessageResult.getStatus().isSuccess()) {
+                                Log.d(WEARABLE_MAIN, "Failed message " + sendMessageResult.getStatus().getStatusMessage());
+                            } else {
+                                Log.d(WEARABLE_MAIN, "Message succeeded " + sendMessageResult.getStatus().getStatusMessage());
+                            }
+                        }
+                    });
+        }
     }
 
     @Override
