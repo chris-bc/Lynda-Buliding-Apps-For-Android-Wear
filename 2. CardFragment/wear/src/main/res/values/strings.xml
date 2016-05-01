@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CardFragment</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="card_title">It\'s time!!</string>
+    <string name="card_description">Your reservation at Landon Hotel is ready for check-in.</string>
+</resources>
