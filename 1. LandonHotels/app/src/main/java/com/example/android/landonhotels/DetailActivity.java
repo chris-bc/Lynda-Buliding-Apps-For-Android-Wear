@@ -1,5 +1,7 @@
 package com.example.android.landonhotels;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -55,11 +57,18 @@ public class DetailActivity extends AppCompatActivity {
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
         bigTextStyle.bigText(text);
 
+        int backgroundId = getResources().getIdentifier(
+                hotel.getImage(), "drawable", getPackageName()
+        );
+        Bitmap background = BitmapFactory.decodeResource(getResources(), backgroundId);
+        NotificationCompat.WearableExtender extender = new NotificationCompat.WearableExtender()
+                .setBackground(background);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setContentTitle(getText(R.string.app_name))
                 .setStyle(bigTextStyle)
-                .setSmallIcon(R.drawable.ic_notify);
+                .setSmallIcon(R.drawable.ic_notify)
+                .extend(extender);
         int notificationId = 0;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(notificationId, builder.build());
