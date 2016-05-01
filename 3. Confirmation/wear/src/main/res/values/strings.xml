@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Landon Hotels</string>
+    <string name="card_title">It\'s time!!</string>
+    <string name="card_description">Your reservation at Landon Hotel is ready for check-in.</string>
+    <string name="confirming">Confirming...</string>
+    <string name="made_reservation">You made a reservation</string>
+    <string name="tap_anywhere">Tap anywhere</string>
+</resources>
